@@ -29,11 +29,20 @@ inquirer.prompt([
     },
 ]).then(function(answers){
     console.log(answers);
-    htmlCreator(answers);
+    const myHtmlTemp = htmlCreator(answers);
+    console.log(myHtmlTemp);
+
+    fs.writeFile("profile.html",myHtmlTemp,function(err){
+        if(err) {
+            console.log(err);
+        } else{
+            console.log("Operation sucessful");
+        }
+    })
 })
 
 function htmlCreator(answers) {
-    `<!doctype html>
+    return `<!doctype html>
     <html lang="en">
       <head>
         <!-- Required meta tags -->
@@ -47,8 +56,8 @@ function htmlCreator(answers) {
       </head>
       <body>
         <div class="jumbotron">
-            <h4 class="display-4">Name: ${answers.userName}</h4>
-            <h4 class="display-4">location: ${answers.userName}</h4>
+            <h4 class="display-4">Name: ${answers.username}</h4>
+            <h4 class="display-4">location: ${answers.location}</h4>
             <h4 class="display-4">bio: ${answers.bio}</h4>
             <h4 class="display-4">linkedin_URL: ${answers.linkedin}</h4>
             <h4 class="display-4">github_URL: ${answers.github}</h4>
